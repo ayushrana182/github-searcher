@@ -1,16 +1,21 @@
-import React, { useContext } from 'react'
-import GithubContext from '../../context/githubContext';
-import RepoItem from './RepoItem';
+import React, { useContext } from "react";
+import GithubContext from "../../context/githubContext";
+import RepoItem from "./RepoItem";
+import { Container } from "@chakra-ui/react";
 
 const Repos = () => {
-    const githubContext = useContext(GithubContext);
+  const githubContext = useContext(GithubContext);
 
-    const { repos } = githubContext;
+  const { repos } = githubContext;
   return (
-    <div>{repos.map((repo) => 
-        <RepoItem key={repo.id} repo={repo}/>
-        )}</div>
-  )
-}
+    <div>
+      <Container>
+        {repos.map((repo) => (
+          <RepoItem key={repo.id} repo={repo}/>
+        ))}
+      </Container>
+    </div>
+  );
+};
 
-export default Repos
+export default Repos;

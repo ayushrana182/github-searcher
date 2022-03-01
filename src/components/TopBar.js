@@ -1,7 +1,7 @@
 import { Box, Button, Center, FormControl, HStack, Input } from "@chakra-ui/react";
 import React, { useContext, useState } from "react";
+import { AiOutlineSearch } from "react-icons/ai";
 import GithubContext from "../context/githubContext";
-
 import { ColorModeSwitcher } from "./ColorModeSwitcher";
 
 const SearchBar = () => {
@@ -9,20 +9,17 @@ const SearchBar = () => {
   const [text, setText] = useState('');
   const onChange = e => setText(e.target.value);
   const onSubmit = e => {
-    e.preventDefault();
     if (text === '') {
       alert('Please enter something');
     } else {
       githubContext.searchRepos(text);
-      setText('');
-      console.log(text);
     }
   };
 
   return(
-    <FormControl  >
-      <Input placeholder='Search Bar' variant='filled' value={text} onChange={onChange} />
-      <Button onClick={onSubmit}>Search</Button>
+    <FormControl style={{display:"flex", justifyContent:"flex-start"}}>
+      <Input placeholder='Search Bar'  value={text} onChange={onChange} sx={{mr:6}} />
+      <Button onClick={onSubmit} rightIcon={<AiOutlineSearch />}>Search</Button>
     </FormControl>
     ) 
 };
