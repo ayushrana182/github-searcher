@@ -7,22 +7,30 @@ import {
 import GithubContext from "../context/githubContext";
 import { Box } from "@chakra-ui/react";
 
-const Filters = () => {
+const Filters = (text) => {
   const githubContext = useContext(GithubContext);
 
-  const { searchReposAsc } = githubContext;
+  const { searchReposAsc, searchReposDesc } = githubContext;
 
   const handleSortAsc = () => {
-    searchReposAsc();
+    searchReposAsc(text);
+    console.log(text);
   };
+
+  const handleSortDesc = () => {
+    searchReposDesc(text);
+    console.log(text);
+  };
+
   return (
     <Box display='flex'>
       <Tag
         size='lg'
         variant='subtle'
         colorScheme='cyan'
-        onChange={handleSortAsc}
+        onClick={handleSortAsc}
         cursor='pointer'
+        ml={4}
       >
         <TagLeftIcon boxSize='12px' as={AiOutlineSortAscending} />
         <TagLabel>Asc</TagLabel>
@@ -32,7 +40,7 @@ const Filters = () => {
         variant='subtle'
         colorScheme='cyan'
         cursor='pointer'
-        // onClick={onChange1}
+        onClick={handleSortDesc}
         ml={4}
       >
         <TagLeftIcon boxSize='12px' as={AiOutlineSortDescending} />

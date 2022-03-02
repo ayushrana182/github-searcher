@@ -47,10 +47,10 @@ const GithubState = (props) => {
   };
 
   //Search Ascending
-  const searchReposAsc = async (login) => {
+  const searchReposAsc = async (text) => {
     const res =
-      await axios.get(`https://api.github.com/search/repositories?q=${login}&client_id=${githubClientId}&page=1&per_page=50
-              &client_secret=${githubClientSecret}+sort:author-date-asc`);
+      await axios.get(`https://api.github.com/search/repositories?q=${text}&sort=stars&order=asc&client_id=${githubClientId}&page=1&per_page=50
+              &client_secret=${githubClientSecret}`);
 
     dispatch({
       type: SEARCH_REPOSASC,
@@ -60,10 +60,10 @@ const GithubState = (props) => {
   };
 
   //Search Descending
-  const searchReposDesc = async (login) => {
+  const searchReposDesc = async (text) => {
     const res =
-      await axios.get(`https://api.github.com/search/repositories?q=${login}&client_id=${githubClientId}&page=1&per_page=50
-              &client_secret=${githubClientSecret}+sort:author-date-desc`);
+      await axios.get(`https://api.github.com/search/repositories?q=${text}&sort=stars&order=desc&client_id=${githubClientId}&page=1&per_page=50
+              &client_secret=${githubClientSecret}`);
 
     dispatch({
       type: SEARCH_REPOSDESC,
@@ -87,7 +87,7 @@ const GithubState = (props) => {
     const res = await axios.get(
       `https://api.github.com/repos/${login}/${name}/contents/README.md?client_id=${githubClientId}&client_secret=${githubClientSecret}`
     );
-    // https://www.npmjs.com/package/js-base64
+    // https://www.npmjs.com/package/base-64
     res.data.content = base64.decode(res.data.content);
     dispatch({
       type: GET_MARKDOWN,

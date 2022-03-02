@@ -5,6 +5,7 @@ import {
   FormControl,
   HStack,
   Input,
+  VStack,
 } from "@chakra-ui/react";
 import React, { useContext, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
@@ -25,21 +26,18 @@ const SearchBar = () => {
   };
 
   return (
-    <FormControl style={{ display: "flex", justifyContent: "flex-start" }}>
-      <Input
-        placeholder='Search Bar'
-        value={text}
-        onChange={onChange}
-        sx={{ mr: 6 }}
-      />
+    <HStack spacing={2}>
+      <Input placeholder='Search Bar' value={text} onChange={onChange} mr={3} />
       <Button
         onClick={onSubmit}
         leftIcon={<AiOutlineSearch />}
         colorScheme='teal'
+        size='sm'
       >
         Search
       </Button>
-    </FormControl>
+      <Filters text={text} />
+    </HStack>
   );
 };
 
@@ -47,10 +45,8 @@ const TopBar = () => {
   return (
     <Center>
       <Box maxWidth='8x1' margin='auto' p={5}>
-        <HStack spacing={8}>
+        <HStack>
           <SearchBar />
-          <Filters />
-
           <ColorModeSwitcher />
         </HStack>
       </Box>
