@@ -2,7 +2,6 @@ import {
   Box,
   Button,
   Flex,
-  Image,
   Link,
   Modal,
   ModalBody,
@@ -13,12 +12,12 @@ import {
   ModalOverlay,
   useDisclosure,
 } from "@chakra-ui/react";
-import React, { useContext, useEffect, useRef } from "react";
+import React, { useContext, useEffect } from "react";
 import GithubContext from "../../context/githubContext";
 import { useParams, Link as LinkRRD } from "react-router-dom";
-import { AiOutlineFork, AiOutlineLink } from "react-icons/ai";
+import { AiOutlineFork } from "react-icons/ai";
 import { GoIssueOpened } from "react-icons/go";
-import MarkdownView from "./MarkdownView";
+import MarkdownView from "../MarkdownView";
 
 const Repo = () => {
   const githubContext = useContext(GithubContext);
@@ -30,12 +29,11 @@ const Repo = () => {
     getRepo(params.login, params.name);
     // eslint-disable-next-line
   }, [params.name]);
-  console.log(repo);
 
   return (
     <>
       {Boolean(repo) && (
-        <Flex direction='column' align='center' maxW={{ xl: "1200px" }}>
+        <Flex direction='column' align='center'>
           <LinkRRD to='/'>Go Back</LinkRRD>
           <Box
             maxW='sm'

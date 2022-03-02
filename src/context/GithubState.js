@@ -2,7 +2,13 @@ import React, { useReducer } from "react";
 import axios from "axios";
 import GithubContext from "./githubContext";
 import GithubReducer from "./githubReducer";
-import { SEARCH_REPOS, GET_REPO, GET_MARKDOWN } from "../types";
+import {
+  SEARCH_REPOS,
+  GET_REPO,
+  GET_MARKDOWN,
+  SEARCH_REPOSASC,
+  SEARCH_REPOSDESC,
+} from "../types";
 import base64 from "base-64";
 
 let githubClientId;
@@ -25,6 +31,8 @@ const GithubState = (props) => {
 
   const [state, dispatch] = useReducer(GithubReducer, initialState);
 
+  //api.github.com/
+
   //Search Repos
   const searchRepos = async (text) => {
     const res =
@@ -35,10 +43,35 @@ const GithubState = (props) => {
       type: SEARCH_REPOS,
       payload: res.data.items,
     });
+    console.log("search", res.data.items);
+  };
+
+  //Search Ascending
+  const searchReposAsc = async (login) => {
+    const res =
+      await axios.get(`https://api.github.com/search/repositories?q=${login}&client_id=${githubClientId}&page=1&per_page=50
+              &client_secret=${githubClientSecret}+sort:author-date-asc`);
+
+    dispatch({
+      type: SEARCH_REPOSASC,
+      payload: res.data.items,
+    });
+    console.log("asc", res.data.items);
+  };
+
+  //Search Descending
+  const searchReposDesc = async (login) => {
+    const res =
+      await axios.get(`https://api.github.com/search/repositories?q=${login}&client_id=${githubClientId}&page=1&per_page=50
+              &client_secret=${githubClientSecret}+sort:author-date-desc`);
+
+    dispatch({
+      type: SEARCH_REPOSDESC,
+      payload: res.data.items,
+    });
   };
 
   // Get Repo
-
   const getRepo = async (login, name) => {
     const res = await axios.get(
       `https://api.github.com/repos/${login}/${name}?client_id=${githubClientId}&client_secret=${githubClientSecret}`
@@ -49,6 +82,7 @@ const GithubState = (props) => {
     });
   };
 
+  // Get Markdown
   const getMarkDown = async (login, name) => {
     const res = await axios.get(
       `https://api.github.com/repos/${login}/${name}/contents/README.md?client_id=${githubClientId}&client_secret=${githubClientSecret}`
@@ -70,6 +104,8 @@ const GithubState = (props) => {
         searchRepos,
         getRepo,
         getMarkDown,
+        searchReposAsc,
+        searchReposDesc,
       }}
     >
       {props.children}

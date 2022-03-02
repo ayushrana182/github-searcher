@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import ReactMarkdown from "react-markdown";
 import { useParams } from "react-router-dom";
-import GithubContext from "../../context/githubContext";
+import GithubContext from "../context/githubContext";
 
 const MarkdownView = () => {
   const githubContext = useContext(GithubContext);

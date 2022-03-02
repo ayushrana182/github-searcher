@@ -11,7 +11,7 @@ const Repos = () => {
     <div>
       <Container>
         {repos.map((repo) => (
-          <RepoItem key={repo.id} repo={repo}/>
+          <RepoItem key={repo.id} repo={repo} />
         ))}
       </Container>
     </div>
