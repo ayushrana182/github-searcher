@@ -43,7 +43,6 @@ const GithubState = (props) => {
       type: SEARCH_REPOS,
       payload: res.data.items,
     });
-    console.log("search", res.data.items);
   };
 
   //Search Ascending
@@ -56,7 +55,6 @@ const GithubState = (props) => {
       type: SEARCH_REPOSASC,
       payload: res.data.items,
     });
-    console.log("asc", res.data.items);
   };
 
   //Search Descending
@@ -101,6 +99,7 @@ const GithubState = (props) => {
         repos: state.repos,
         repo: state.repo,
         md: state.md,
+        loading: state.loading,
         searchRepos,
         getRepo,
         getMarkDown,

@@ -34,6 +34,7 @@ export default (state, action) => {
         ...state,
         repos: action.payload,
       };
+
     default:
       return state;
   }

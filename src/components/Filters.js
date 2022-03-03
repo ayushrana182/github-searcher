@@ -14,12 +14,10 @@ const Filters = (text) => {
 
   const handleSortAsc = () => {
     searchReposAsc(text);
-    console.log(text);
   };
 
   const handleSortDesc = () => {
     searchReposDesc(text);
-    console.log(text);
   };
 
   return (

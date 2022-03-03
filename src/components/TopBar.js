@@ -1,12 +1,4 @@
-import {
-  Box,
-  Button,
-  Center,
-  FormControl,
-  HStack,
-  Input,
-  VStack,
-} from "@chakra-ui/react";
+import { Box, Button, Center, HStack, Input } from "@chakra-ui/react";
 import React, { useContext, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import GithubContext from "../context/githubContext";
@@ -32,10 +24,8 @@ const SearchBar = () => {
         onClick={onSubmit}
         leftIcon={<AiOutlineSearch />}
         colorScheme='teal'
-        size='sm'
-      >
-        Search
-      </Button>
+        size='md'
+      ></Button>
       <Filters text={text} />
     </HStack>
   );
